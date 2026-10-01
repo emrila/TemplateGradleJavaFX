@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'org.emrila'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+        vendor = JvmVendorSpec.ORACLE
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:6.0.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testImplementation  "org.testfx:testfx-core:4.0.18"
+    testImplementation "org.assertj:assertj-core:3.27.7"
+
+    implementation 'org.kordamp.ikonli:ikonli-javafx:12.4.0'
+    implementation 'org.kordamp.ikonli:ikonli-evaicons-pack:12.4.0'
+}
+
+javafx {
+    version = '27'
+    modules = [
+            'javafx.controls',
+            'javafx.web'
+    ]
+}
+
+application {
+    mainModule = 'org.emrila.templategradlejavafx'
+    mainClass = 'org.emrila.templategradlejavafx.Launcher'
+    applicationDefaultJvmArgs = [
+            '--enable-native-access=javafx.graphics,javafx.web'
+    ]
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -34,6 +34,8 @@ javafx {
     version = '27'
     modules = [
             'javafx.controls',
+            'javafx.graphics',
+            'javafx.media',
             'javafx.web'
     ]
 }

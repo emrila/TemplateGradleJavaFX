@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
     id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
@@ -40,12 +39,13 @@ javafx {
     ]
 }
 
-application {
-    mainModule = 'org.emrila.templategradlejavafx'
-    mainClass = 'org.emrila.templategradlejavafx.Launcher'
-    applicationDefaultJvmArgs = [
-            '--enable-native-access=javafx.graphics,javafx.web'
-    ]
+tasks.register("run", JavaExec) {
+    group = 'application'
+    dependsOn tasks.named('classes')
+    jvmArgs '--enable-native-access=javafx.graphics,javafx.web'
+    classpath = sourceSets.main.runtimeClasspath
+    mainModule =  'org.emrila.templategradlejavafx'
+    mainClass = "org.emrila.templategradlejavafx.Launcher"
 }
 
 test {
